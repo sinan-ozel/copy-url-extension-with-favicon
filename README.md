@@ -1,11 +1,11 @@
-# Copy Link
+# Copy Link With `favicon`
 
-This has a couple super-small extensions, one to copy HTML links of a page, and another to copy Markdown links.
+This is an extension of the "Copy URL Extension" by Ian Bicking, available here:
+[https://github.com/ianb/copy-url-extension.git]
 
-That is, they copy:
+It copies the current URL, in HTML or markdown, and also adds the `favicon` to the beginning.
 
-* `<a href="URL">TITLE</a>` (good for pasting into an email or document)
-* `[TITLE](URL)` (good for pasting into a Markdown document)
+I (the author) is using this script to add links to my Joplin app, which I use as a centralized bookmark tool.
 
 ## Installing
 
@@ -14,22 +14,7 @@ These add-ons are both published on addons.mozilla.org:
 * [Copy Markdown link](https://addons.mozilla.org/en-US/firefox/addon/copy-markdown-link/)
 * [Copy HTML link](https://addons.mozilla.org/en-US/firefox/addon/copy-html-link/)
 
-## Developing
+## Contributors
 
-To install and test out:
-
-```sh
-git clone https://github.com/ianb/copy-url-extension.git
-cd copy-url-extension
-npm install
-npm run start:md   # Test Markdown version
-npm run start:html # Text HTML version
-```
-
-### Contact & Contribution
-
-IRC is the best way to communicate, via `#testpilot` on irc.mozilla.org (you can use [this link](https://kiwiirc.com/nextclient/irc.mozilla.org/testpilot) for chat access via the web if you do not otherwise use IRC). You might want to ping `ianbicking`
-
-### Contributors
-
+Original author is [Ian Bicking](https://github.com/ianb/), I only wrote the favicon part.
 The [icon](https://thenounproject.com/search/?q=link&i=1480779) is by [Kidiladon](https://thenounproject.com/kidilandon)
