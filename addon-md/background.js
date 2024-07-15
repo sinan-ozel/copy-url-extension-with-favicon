@@ -2,12 +2,12 @@ browser.contextMenus.create({
   title: "Copy Markdown link with favicon",
   contexts: ["page", "tab"],
   onclick: (info, tab) => {
-    copyText(`[${tab.title}](${tab.url})`);
+    copyBookMarkDown(tab);
   }
 });
 
 browser.pageAction.onClicked.addListener((tab) => {
-  copyText(formatBookMarkDown(tab));
+  copyBookMarkDown(tab);
 });
 
 let input = document.createElement("input");
@@ -21,11 +21,30 @@ function copyText(text) {
   document.execCommand("copy");
 }
 
-function formatBookMarkDown(tab){
+function copyBookMarkDown(tab){
   if (tab.favIconUrl === undefined){
-    return `[${tab.title}](${tab.url})`
+    copyText(`[${tab.title}](${tab.url})`)
   }
   else{
-    return `<img src="${tab.favIconUrl}" width="12"> [${tab.title}](${tab.url})`
+    resizeBase64Img(tab.favIconUrl, 12, 12).then((result)=>{
+      copyText(`<img src="${result}" width="12"> [${tab.title}](${tab.url})`)
+    });
   }
+}
+
+// https://stackoverflow.com/questions/20379027/javascript-reduce-the-size-and-quality-of-image-with-based64-encoded-code
+function resizeBase64Img(base64, newWidth, newHeight) {
+  return new Promise((resolve, reject)=>{
+      const canvas = document.createElement("canvas");
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      let context = canvas.getContext("2d");
+      let img = document.createElement("img");
+      img.src = base64;
+      img.onload = function () {
+          context.scale(newWidth/img.width,  newHeight/img.height);
+          context.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL());
+      }
+  });
 }
